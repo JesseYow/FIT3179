@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 300,
+  "data": {"url": "world-data-2023.csv"},
+  "mark": "circle",
+  "encoding": {
+    "x": {
+      "field": "Gross primary education enrollment (%)",
+      "type": "quantitative",
+      "title": "Confirmed Cases"
+    },
+    "y": {
+      "field": "Gross tertiary education enrollment (%)",
+      "type": "quantitative"
+    },
+    "color": {"field": "Country", "type": "nominal"},
+    "size": {
+      "field": "Unemployment rate",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+        "range": [50, 200, 350, 500, 650, 800]
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "type": "ordinal", "title": "Country"},
+      {
+        "field": "Gross primary education enrollment (%)",
+        "type": "quantitative",
+        "format": ".2f"
+      },
+      {
+        "field": "Gross tertiary education enrollment (%)",
+        "type": "quantitative",
+        "format": ".2f"
+      },
+      {"field": "Unemployment rate", "type": "quantitative", "format": ".2f"}
+    ]
+  },
+  "config": {}
+}
