@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A ranged dot plot that uses 'layer' to convey changing life expectancy for the five most populous countries (between 1955 and 2000).",
+  "width": 300,
+  "height": 260,
+  "title": "World Countries' Life Expectancy",
+  "background": "#bababa",
+  "data": {
+    "url": "https://raw.githubusercontent.com/JesseYow/FIT3179/main/Assignment2/TransformedLifeExpectancy.csv"
+  },
+  "transform": [{"filter": {"field": "Year", "oneOf": [2000, 2015]}}],
+  "encoding": {
+    "x": {
+      "field": "Life_expectancy",
+      "type": "quantitative",
+      "title": "Life Expectancy (years)"
+    },
+    "y": {
+      "field": "Region",
+      "type": "nominal",
+      "title": "Region",
+      "axis": {"offset": 5, "ticks": false, "minExtent": 70, "domain": false}
+    },
+    "tooltip": [
+      {"field": "Region", "type": "ordinal", "title": "Region"},
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {
+        "field": "Life_expectancy",
+        "type": "quantitative",
+        "format": ".1f",
+        "title": "Life Expectancy"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "detail": {"field": "Region", "type": "nominal"},
+        "color": {"value": "#db646f"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "color": {
+          "field": "Year",
+          "type": "nominal",
+          "scale": {"range": ["#8B0000", "#FF5733"]},
+          "title": "Year"
+        },
+        "size": {"value": 100},
+        "opacity": {"value": 1}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "Africa has the lowest"},
+        "x": {"value": 75},
+        "y": {"value": 70}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "life expectancy but"},
+        "x": {"value": 75},
+        "y": {"value": 83}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "has the greatest"},
+        "x": {"value": 75},
+        "y": {"value": 95}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "improvment of all"},
+        "x": {"value": 75},
+        "y": {"value": 107}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "regions."},
+        "x": {"value": 75},
+        "y": {"value": 117}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "North America has consistent"},
+        "x": {"value": 75},
+        "y": {"value": 167}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "good life expectancy"},
+        "x": {"value": 75},
+        "y": {"value": 177}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": " throughout the years but"},
+        "x": {"value": 75},
+        "y": {"value": 187}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "Asia has overtaken them"},
+        "x": {"value": 75},
+        "y": {"value": 197}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "being the highest life"},
+        "x": {"value": 75},
+        "y": {"value": 207}
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "expectancy in year 2015."},
+        "x": {"value": 75},
+        "y": {"value": 217}
+      }
+    }
+  ],
+  "config": {}
+}

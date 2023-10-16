@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/JesseYow/FIT3179/main/Assignment2/Stacked%20Bar%20Chart%20Life%20Expectancy.csv"
+  },
+  "mark": "bar",
+  "width": 300,
+  "height": 260,
+  "title": "Different Mortalities in Regions",
+  "background": "#bababa",
+  "params": [
+    {
+      "name": "Year_Selection",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2015,
+        "step": 1,
+        "name": "Year Selection: "
+      }
+    },
+    {
+      "name": "Attribute_Selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Adult_mortality",
+          "Infant_deaths",
+          "Under_five_deaths"
+        ],
+        "labels": [
+          "All",
+          "Adult Mortality",
+          "Infant Deaths",
+          "Under Five Deaths"
+        ],
+        "name": "Attribute Selection:"
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year > 0"},
+    {"filter": "Year_Selection == null || datum.Year == Year_Selection"},
+    {
+      "filter": "Attribute_Selection == null || datum.Attribute == Attribute_Selection"
+    }
+  ],
+  "selection": {
+    "continent_highlight": {
+      "type": "multi",
+      "fields": ["Attribute"],
+      "bind": "legend"
+    }
+  },
+  "encoding": {
+    "x": {"aggregate": "sum", "field": "Value"},
+    "y": {"field": "Region"},
+    "color": {
+      "field": "Attribute",
+      "scale": {
+        "domain": ["Adult_mortality", "Infant_deaths", "Under_five_deaths"],
+        "range": ["#FF5733", "#33FF57", "#337AFF"]
+      }
+    },
+    "tooltip": [
+      {"field": "Region", "type": "nominal", "title": "Region"},
+      {"field": "Attribute", "type": "nominal", "title": "Attribute"},
+      {
+        "field": "sum_Value",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Attribute Value"
+      }
+    ],
+    "opacity": {
+      "condition": {"selection": "continent_highlight", "value": 1},
+      "value": 0.5
+    }
+  },
+  "config": {}
+}

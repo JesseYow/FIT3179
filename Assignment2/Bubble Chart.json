@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 420,
+  "height": 260,
+  "data": {
+    "url": "https://raw.githubusercontent.com/JesseYow/FIT3179/main/Assignment2/world-data-2023.csv"
+  },
+  "title": "Gross Primary Education Against Gross Tertiary Education for Countries",
+  "params": [
+    {
+      "name": "primary_education",
+      "value": 0.2,
+      "bind": {
+        "input": "range",
+        "min": 0.2,
+        "max": 1.4,
+        "step": 0.01,
+        "name": "Gross Primary Education(%):"
+      }
+    },
+    {
+      "name": "tertiary_education",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 1.3,
+        "step": 0.01,
+        "name": "Gross Tertiary Education(%):"
+      }
+    },
+    {
+      "name": "Unemployment",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 0.25,
+        "step": 0.001,
+        "name": "Unemployment Rate:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum['Gross primary education enrollment (%)'] > primary_education"
+    },
+    {
+      "filter": "datum['Gross tertiary education enrollment (%)'] > tertiary_education"
+    },
+    {"filter": "datum['Unemployment rate'] > Unemployment"}
+  ],
+  "mark": "circle",
+  "encoding": {
+    "x": {
+      "field": "Gross primary education enrollment (%)",
+      "type": "quantitative",
+      "title": "Gross primary education enrollment (%)"
+    },
+    "y": {
+      "field": "Gross tertiary education enrollment (%)",
+      "type": "quantitative"
+    },
+    "color": {"field": "Country", "type": "nominal", "legend": null},
+    "size": {
+      "field": "Unemployment rate",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.2, 0.25],
+        "range": [50, 100, 150, 200, 250, 300, 350, 400, 450]
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "type": "ordinal", "title": "Country"},
+      {
+        "field": "Gross primary education enrollment (%)",
+        "type": "quantitative",
+        "format": ".2f"
+      },
+      {
+        "field": "Gross tertiary education enrollment (%)",
+        "type": "quantitative",
+        "format": ".2f"
+      },
+      {"field": "Unemployment rate", "type": "quantitative", "format": ".2f"}
+    ]
+  },
+  "config": {}
+}
