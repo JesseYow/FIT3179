@@ -1,0 +1,182 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 450,
+  "height": 300,
+  "background": "#e7e6e6",
+  "data": {
+    "url": "https://raw.githubusercontent.com/JesseYow/FIT3179/main/Assignment2/world-data-2023.csv"
+  },
+  "title": "Gross Primary Education Against Gross Tertiary Education for Countries",
+  "params": [
+    {
+      "name": "primary_education",
+      "value": 0.2,
+      "bind": {
+        "input": "range",
+        "min": 0.2,
+        "max": 1.4,
+        "step": 0.01,
+        "name": "Gross Primary Education(%):"
+      }
+    },
+    {
+      "name": "tertiary_education",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 1.3,
+        "step": 0.01,
+        "name": "Gross Tertiary Education(%):"
+      }
+    },
+    {
+      "name": "Unemployment",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 0.25,
+        "step": 0.001,
+        "name": "Unemployment Rate:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum['Gross primary education enrollment (%)'] > primary_education"
+    },
+    {
+      "filter": "datum['Gross tertiary education enrollment (%)'] > tertiary_education"
+    },
+    {"filter": "datum['Unemployment rate'] > Unemployment"}
+  ],
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "x": {
+          "field": "Gross primary education enrollment (%)",
+          "type": "quantitative",
+          "title": "Gross primary education enrollment (%)"
+        },
+        "y": {
+          "field": "Gross tertiary education enrollment (%)",
+          "type": "quantitative"
+        },
+        "color": {"field": "Country", "type": "nominal", "legend": null},
+        "size": {
+          "field": "Unemployment rate",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.2, 0.25],
+            "range": [50, 100, 150, 200, 250, 300, 350, 400, 450]
+          }
+        },
+        "tooltip": [
+          {"field": "Country", "type": "ordinal", "title": "Country"},
+          {
+            "field": "Gross primary education enrollment (%)",
+            "type": "quantitative",
+            "format": ".2f"
+          },
+          {
+            "field": "Gross tertiary education enrollment (%)",
+            "type": "quantitative",
+            "format": ".2f"
+          },
+          {"field": "Unemployment rate", "type": "quantitative", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "Madagascar and Malawi with the highest"},
+        "x": {"value": 150}, 
+        "y": {"value": 60}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "gross primary education enrollment"},
+        "x": {"value": 150}, 
+        "y": {"value": 72}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "but is one of the lowest gross tertiary"},
+        "x": {"value": 150}, 
+        "y": {"value": 84}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "education enrollment."},
+        "x": {"value": 150}, 
+        "y": {"value": 96}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "South Africa has the highest"},
+        "x": {"value": 130},
+        "y": {"value": 150}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "unemployment rate due to low"},
+        "x": {"value": 130}, 
+        "y": {"value": 162}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "tertiary education enrollment."},
+        "x": {"value": 130},
+        "y": {"value": 174}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "Greece having the most in"},
+        "x": {"value": 110}, 
+        "y": {"value": 210}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "primary and tertiary education"},
+        "x": {"value": 110}, 
+        "y": {"value": 222}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "enrollment but is struggling"},
+        "x": {"value": 110},
+        "y": {"value": 234}
+      }
+    },
+        {
+      "mark": {"type": "text", "baseline": "middle", "dy": -10},
+      "encoding": {
+        "text": {"value": "in their high unemployment rate."},
+        "x": {"value": 110}, 
+        "y": {"value": 246}
+      }
+    }
+  ]
+}
